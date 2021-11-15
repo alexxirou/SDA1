@@ -4,9 +4,14 @@
 
 #define MAX_P 50
 
-typedef struct {
+/*typedef struct {
     char tab[MAX_P];
     Nat h; } Pile;
+*/
+
+typedef struct {
+    char v;
+    struct spile *s; }Spile, *Pile;
 
 Pile pilenouv();
 
@@ -21,5 +26,8 @@ Car sommet(Pile p);
 Bool vide(Pile p);
 
 Nat hauteur(Pile p);
+
+
+//bool check_Parenthese(char * mot);
 
 #endif
