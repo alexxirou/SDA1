@@ -9,12 +9,12 @@ int main()
     test_pile=empiler(test_pile, 'b');
     printf("Résultat empilation: %c\n", test_pile.tab[test_pile.h-1]);
     
-    //depiler(test_pile);
-    //printf("Résultat depilation %c", test_pile.tab[test_pile.h-1]);
-    //remplacer(test_pile, 'c');
-    //printf("Résultat remplacement %c", test_pile.tab[test_pile.h-1]);
-    //printf("Résultat sommet %c", sommet(test_pile));
-    //printf("Resultat vacuité %d",vide(test_pile));
-    //printf("Hauteur de pile %d", hauteur(test_pile));
+    test_pile=depiler(test_pile);
+    printf("Résultat depilation %c\n", test_pile.tab[test_pile.h-1]);
+    test_pile=remplacer(test_pile, 'c');
+    printf("Résultat remplacement %c\n", test_pile.tab[test_pile.h-1]);
+    printf("Résultat sommet %c\n", sommet(test_pile));
+    printf("Resultat vacuité %s\n",vide(test_pile));
+    printf("Hauteur de pile %d\n", hauteur(test_pile));
     return 0;
 }
