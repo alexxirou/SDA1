@@ -1,32 +1,38 @@
+#if CHAINE 
+#include "pile_char2.h"
+#else
 #include "pile_char.h"
+#endif
 #include <string.h>
 #include <stdio.h>
-
-
   
 bool check_Parenthese(char *mot)  
 {
-  Pile test = pilenouv();
-
+  Pile open = pilenouv();
+  Pile close = pilenouv();
   for (int i=0; i<strlen(mot); i++)
-  { 
-    if (mot[i]=='{' || mot[i]=='('|| mot[i]=='[' || mot[i]=='}'|| mot[i]==']'|| mot[i]==')') empiler(test, mot[i]);
+  {
+    if (mot[i]=='{' || mot[i]=='['|| mot[i]=='(')
+    {
+      open=empiler(open, mot[i]);
+    }
+
   }
-  while (hauteur(test)>1)
-  {   
-      printf("%c\n",test->tab[test->h-1]);
-      if ((test->tab[test->h-1]==')' && test->tab[test->h-2]=='(') || (test->tab[test->h-1]==']'&& test->tab[test->h-2]=='[') || (test->tab[test->h-1]=='}' && test->tab[test->h-2]=='{'))
-      {
-        depiler(test);  
-        //printf("%c\n",test->tab[test->h-1]);
-        depiler(test);  
-        //printf("%d\n",test->h);
-      }
-      //retour le dernière parenthése fausse
-      else { 
-        printf("Problem avec %c numéro %d\n", test->tab[test->h-1], test->h); 
-        return faux;
-      }  
+  for (int i=strlen(mot)-1; i>=0; i--)
+  {
+      if (mot[i]=='}' || mot[i]==']'|| mot[i]==')')
+    {
+      close=empiler(close, mot[i]);
+    }
   }
-  return vide(test);
+  while(hauteur(open)>0 && hauteur(close)>0)
+  {
+     if ((sommet(open)=='{' && sommet(close)=='}' )|| (sommet(open)=='[' && sommet(close)==']')|| (sommet(open)=='(' && sommet(close)==')'))
+     {
+      open=depiler(open);
+      close=depiler(close);
+     }
+     else return faux;
+  }
+  return vide(open)&&vide(close);
 }

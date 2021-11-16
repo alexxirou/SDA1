@@ -1,13 +1,11 @@
-#ifndef __PILE_CHAR_H
-#define __PILE_CHAR_H
 #include "base.h"
-
 #define MAX_P 50
 
 
-typedef struct {
-    char tab[MAX_P];
-    Nat h; } Pile;
+typedef struct spile {
+char v;
+struct spile *s;
+} Spile, *Pile;
 
 
 
