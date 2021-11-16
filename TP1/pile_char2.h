@@ -26,7 +26,6 @@ Nat hauteur(Pile p);
 
 bool check_Parenthese(char * mot);
 
-void test_pile(Pile p, char a, char b , char c);
+void test_pile(char a, char b , char c);
 
 
-#endif

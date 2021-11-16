@@ -1,11 +1,11 @@
-#if CHAINE 
-#include "pile_char2.h"
-#else
+#if CONT
 #include "pile_char.h"
+#else
+#include "pile_char2.h"
 #endif
 
-void test_pile(Pile p, char a, char b , char c)
-{
+void test_pile(char a, char b , char c)
+{   Pile p=pilenouv();
     p=empiler(p,a);
     printf("Resultant empilation avec %c %c\n", a, sommet(p));
     p=empiler(p,b);

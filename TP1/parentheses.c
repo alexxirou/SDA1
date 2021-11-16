@@ -1,7 +1,7 @@
-#if CHAINE 
-#include "pile_char2.h"
-#else
+#if CONT
 #include "pile_char.h"
+#else 
+#include "pile_char2.h"
 #endif
 #include <string.h>
 #include <stdio.h>

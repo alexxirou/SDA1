@@ -1,20 +1,18 @@
-MODE=CHAINE
+MODE=CONT
 OBJECTS= parentheses.o test_pile.o xpile.o
 SRC = parentheses.c test_pile.c xpile.c 
-ifeq "$(MODE)" "CHAINE"
-OBJECTS += pile_char2.o 
-SRC += pile_char2.c
+ifeq "$(MODE)" "CONT"
+OBJECTS += pile_char.o 
 else
-OBJECTS +=pile_char.o
-SRC += pile_char.c
+OBJECTS +=pile_char2.o
 endif
 
 all: xpile
 xpile : $(OBJECTS)
-	gcc-9 -DMODE $(OBJECTS) -o  xpile 
+	gcc-9 -g -D$(MODE) $(OBJECTS) -o  xpile 
 
 $(OBJECTS): %.o:  %.c
-	gcc-9 -DMODE $< -c -o $@  
+	gcc-9 -g -D$(MODE) $< -c -o $@  
 
 clean : 
 	rm *.o xpile 
