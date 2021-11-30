@@ -6,7 +6,7 @@ File filenouv()
 }
 File adjq(File f, Nat s)
 {
-    File new_file = (File)malloc(sizeof(Strfile));
+    File new_file = MALLOC(Strfile);
     new_file->v = s;
     if (f == NULL)
     {
@@ -14,7 +14,7 @@ File adjq(File f, Nat s)
     }
     else
     {
-        new_file->s = f;
+        new_file->s = f->s;
         f->s = new_file;
     }
     return new_file;
@@ -47,16 +47,18 @@ Nat vide(File f)
 {
     return f == NULL;
 }
+
+
+
 Nat longuer(File f)
 {
-    if (vide(f)) return 0;
-    File new_file;
-    new_file->s= f->s;
-    Nat l = 1;
-    while (new_file->s != f)
+    Nat l =1;
+    File count;
+    count=f->s;
+    while(count!=f)
     {
-        new_file = new_file->s;
+        count=count->s;
         l++;
     }
-    return l;
+    return l;  
 }

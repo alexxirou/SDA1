@@ -18,5 +18,7 @@ File supt(File f);
 Nat tete(File f); 
 Nat vide(File f);
 Nat longuer(File f);
-
-
+Nat lgb1(File f1, File f2);
+Nat flavius(File f , Nat skip);
+void test_files(Nat x , Nat y);
+Nat flavius(File f , Nat skip);

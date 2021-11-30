@@ -5,9 +5,9 @@ ifeq "$(MODE)" "CONT"
 OBJECTS += file_int.o 
 else
 	ifeq "$(MODE)" "CIC"
-OBJECTS += file_int3.o 
+OBJECTS += file_int3.o flavius.o
 	else
-OBJECTS +=file_int2.o
+OBJECTS += file_int2.o 
 	endif
 endif
 
