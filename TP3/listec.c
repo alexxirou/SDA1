@@ -111,9 +111,10 @@ Liste suppr_dernier(Liste l){
 }
 
 Liste inser_dernier(Liste l,int v){
-    if (l->s==l||l==NULL) return ajout_tete(l,v);
-    Liste addresse_pos=l->s;
-    while(addresse_pos!=l)
+    if (est_vide(l)) return l;
+    Liste addresse_pos=l;
+    if (l->s==l) return ajout_tete(l,v);
+    while(addresse_pos->s!=l)
     {   
         addresse_pos=addresse_pos->s;
     }
@@ -133,9 +134,8 @@ int acces_dernier(Liste l){ // precondition pas vide
 
 int access_nth(Liste l, Nat i){ //precondtion i<=longeur;  
     Liste addresse_pos=l;
-    for(int j=0; j<i; j++)
+    for(int j=0; j<i-1; j++)
     {   
-        if(addresse_pos->s==l) break;
         addresse_pos=addresse_pos->s;
     }
     return addresse_pos->v;
@@ -143,7 +143,7 @@ int access_nth(Liste l, Nat i){ //precondtion i<=longeur;
 
 Liste insertion_nth(Liste l, int v, Nat i){
     Liste addresse_pos=l;
-    for(int j=0; j<i-1; j++)
+    for(int j=0; j<i-2; j++)
     {   
         if(l->s==l) break;
         l=l->s;
