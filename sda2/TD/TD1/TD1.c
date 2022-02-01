@@ -5,9 +5,9 @@ listeg vide(){
     return NULL;
 }
 
-char* affiche(void* e){
+char* afficheString(void* e){
     if (e==NULL) {printf("Erreur pointeur NULL."); exit(1);}
-    return (char*) e;
+    printf("%s\n", e);
 }
 
 void destroy(void *e){
@@ -17,7 +17,7 @@ void destroy(void *e){
     }
 }
 
-void* clone(void *x){
+void* cloneString(void *x){
     char* res = malloc(strlen((char*) x)+1);
     strncpy(res,x,strlen((char*) x));
     res[strlen((char*) x)] ='\0';
@@ -25,16 +25,13 @@ void* clone(void *x){
 }
 
 
-int compare(void *x1, void *x2){
+int compareString(void *x1, void *x2){
     if (x1==NULL || x2==NULL)return -1;
-    char* x = (char*) x1;
-    char* y = (char*) x2;
-    if (*x == *y || *y == *x +32 || *x == *y +32 ) return 1;
-    return 0;
+    return *(char*) x1 - (*(char*) x2);
 }
 
 
-listeg adjtete(listeg lst, void *x, void* (*clone)(void *)){
+listeg adjTete(listeg lst, void *x, void* (*clone)(void *)){
     listeg new=(listeg)malloc(sizeof(struct s_node));
     if (new==NULL){printf("Nouv pointeur est NULL"); exit(1);}
     new -> prec = NULL;
@@ -44,14 +41,14 @@ listeg adjtete(listeg lst, void *x, void* (*clone)(void *)){
     return new;
 }
 
-listeg adjqueue(listeg lst, void *x, void *(*clone)(void *)){
-    if (lst==NULL)return adjtete(lst,x, clone);
-    lst -> suiv = adjqueue(lst->suiv,x, clone);
+listeg adjQueue(listeg lst, void *x, void *(*clone)(void *)){
+    if (lst==NULL)return adjTete(lst,x, clone);
+    lst -> suiv = adjQueue(lst->suiv,x, clone);
     lst -> suiv -> prec =lst;
     return lst;
 }
 
-listeg suptete(listeg lst, void* (*det)(void *x)){
+listeg supTete(listeg lst, void* (*det)(void *x)){
     if(lst==NULL) return lst;
     listeg temp = lst -> suiv;
     if (temp!=NULL) temp->prec=NULL;
@@ -70,27 +67,26 @@ int longueur(listeg lst){
     return 1+longueur(lst->suiv);
 }
 
-bool estvide(listeg lst){
+bool estVide(listeg lst){
     return lst==NULL;
 } 
 
 void detruire(listeg lst, void* (*det)(void *)){
-    while (lst!=NULL) lst=suptete(lst,det);
+    while (lst!=NULL) lst=supTete(lst,det);
 }
 
 void affichage(listeg lst, void* (*affiche)(void *)){
-    if (lst==NULL){ printf("Liste vide."); exit(1);}
-    while(lst!=NULL){
-        
-        printf("%s\n", (char*) affiche(lst->val));
-        lst=lst->suiv;
+    listeg l = lst;
+    while(l!=NULL){
+        affiche(tete(l));
+        l=l->suiv;
     }    
 }
 
 listeg rech(listeg lst, void *x, int (*cmp)(void *, void *), void *(*clone)(void *)){
     listeg res = NULL;
     while (lst != NULL){
-        if (cmp(lst->val,x)==1) res=adjqueue(res,lst->val,clone);
+        if (cmp(lst->val,x)==0) res=adjQueue(res,lst->val,clone);
         lst=lst->suiv;
     }
     if (res==NULL) {printf("Liste vide.");exit(1);}
